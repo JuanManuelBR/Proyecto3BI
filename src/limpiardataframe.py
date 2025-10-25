@@ -53,7 +53,8 @@ doge_csv_path = "data/coin_Dogecoin.csv"
 
 doge_csv = pd.read_csv(doge_csv_path)
 
-# En el archivo .csv hay columnas que no son necesarias por lo que se deben eliminar, estas son: 'SNo', 'Symbol', 'Market Cap'
+# En el archivo .csv hay columnas que no son necesarias por lo que se deben eliminar
+# como lo son Unix, tradecount, etc.
 
 
 # Estandarizar columnas al igual que Bitcoin y Ethereum
@@ -63,7 +64,7 @@ doge_csv.rename(columns={
     'High': 'high',
     'Low': 'low',
     'Close': 'close',
-    'Volume': 'volume'
+    'Volume USDT': 'volume'
 }, inplace=True)
 
 # Convertir fecha ya que es Datetime, y en la apyi trae solo Date. se agrega la columna de "Symbol"
@@ -157,3 +158,15 @@ print(f"Datos normalizados guardados en: {output_path}")
 # Mostrar ejemplo
 print("\nPrimeras filas de los datos normalizados:")
 print(balanced_data.head())
+
+
+
+# Ver resumen estadístico general
+stats = df.describe()
+print("📊 Estadísticas Descriptivas:")
+print(stats)
+
+# Mostrar valores nulos
+print("\n🔍 Valores nulos por columna:")
+print(df.isnull().sum())
+
