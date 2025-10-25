@@ -25,17 +25,39 @@ if 'Date' in df.columns:
 # 2️⃣ Estadísticas descriptivas
 # ==========================================================
 print("\n📊 Estadísticas Descriptivas:")
-stats = df.describe()
-print(stats)
 
 # Guardar en CSV
 output_dir = Path("output")
 output_dir.mkdir(exist_ok=True)
-stats.to_csv(output_dir / "estadisticas_descriptivas.csv", index=True)
+
+symbol_map = {
+    0: "BTC-USD",
+    1: "ETH-USD",
+    2: "DOGE-USD"
+}
+
+# Imprimir estadísticas descriptivas para cada moneda
+for symbol_id, symbol_name in symbol_map.items():
+    print("\n" + "="*70)
+    print(f"📊 ESTADÍSTICAS DESCRIPTIVAS PARA {symbol_name}")
+    print("="*70)
+    
+    # Filtrar los datos de la moneda
+    df_symbol = df[df['symbol_id'] == symbol_id]
+    
+    # Calcular estadísticas
+    stats = df_symbol.describe()
+    
+    # Mostrar estadísticas
+    print(stats)
+    
+    # Mostrar valores nulos por columna
+    print("\n🔍 Valores nulos por columna:")
+    print(df_symbol.isnull().sum())
+
 
 # Mostrar valores nulos
 print("\n🔍 Valores nulos por columna:")
-print(df.isnull().sum())
 
 # ==========================================================
 # 3️⃣ Visualización de tendencias
