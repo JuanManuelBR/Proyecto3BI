@@ -1,0 +1,12 @@
+black
+flake8
+gdown
+isort
+Jupyter
+matplotlib
+numpy
+pandas
+pytest
+scikit-learn
+seaborn
+yfinance
