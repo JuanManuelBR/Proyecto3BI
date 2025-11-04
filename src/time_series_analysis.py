@@ -17,7 +17,7 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 # ==========================
 # CARGA Y PREPROCESAMIENTO
 # ==========================
-print("📥 Cargando dataset...")
+print("Cargando dataset...")
 df = pd.read_csv(DATA_PATH)
 
 # Convertir la columna de fecha
@@ -35,7 +35,7 @@ df["symbol"] = df["symbol_id"].map(id_map)
 # FUNCIÓN DE ANÁLISIS
 # ==========================
 def analyze_crypto(symbol: str):
-    print(f"\n🔍 Analizando {symbol}...")
+    print(f"\nAnalizando {symbol}...")
     data = df[df["symbol"] == symbol].copy()
 
     # Usar solo la columna 'close'
@@ -54,7 +54,7 @@ def analyze_crypto(symbol: str):
     # ==========================
     # MODELO ARIMA (manual)
     # ==========================
-    print(f"🧠 Ajustando modelo ARIMA(1,1,1) para {symbol}...")
+    print(f"Ajustando modelo ARIMA(1,1,1) para {symbol}...")
     model = ARIMA(ts, order=(1, 1, 1))
     model_fit = model.fit()
 
@@ -103,4 +103,4 @@ if __name__ == "__main__":
     final_df = pd.concat(all_forecasts)
     final_df.to_csv(OUTPUT_DIR / "predictions.csv", index=False)
 
-    print("\n✅ Análisis completado. Resultados guardados en /output/")
+    print("\nAnálisis completado. Resultados guardados en /output/")

@@ -1,4 +1,3 @@
-# src/prediction_models.py
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -12,9 +11,8 @@ from sklearn.preprocessing import MinMaxScaler
 import os
 
 # ==========================================================
-# 1️⃣ Configuración inicial
+# Configuración inicial
 # ==========================================================
-print("📥 Cargando dataset...")
 df = pd.read_csv("data/crypto_dataset_final.csv")
 df["date"] = pd.to_datetime(df["date"], errors="coerce", format="mixed")
 
@@ -23,10 +21,10 @@ os.makedirs("output", exist_ok=True)
 
 # Identificar las monedas únicas
 cryptos = df["symbol_id"].unique()
-print(f"🔍 Monedas encontradas: {cryptos}")
+print(f"Monedas encontradas: {cryptos}")
 
 # ==========================================================
-# 2️⃣ Función para crear secuencias para LSTM / GRU
+# Función para crear secuencias para LSTM / GRU
 # ==========================================================
 def create_sequences(data, time_steps=10):
     X, y = [], []
@@ -36,10 +34,10 @@ def create_sequences(data, time_steps=10):
     return np.array(X), np.array(y)
 
 # ==========================================================
-# 3️⃣ Entrenar y predecir por cada moneda
+# Entrenar y predecir por cada moneda
 # ==========================================================
 for symbol in cryptos:
-    print(f"\n🚀 Procesando symbol_id = {symbol}...")
+    print(f"\nProcesando symbol_id = {symbol}...")
     crypto_df = df[df["symbol_id"] == symbol].sort_values("date")
 
     # Usamos la columna 'close'
@@ -54,9 +52,9 @@ for symbol in cryptos:
     X = np.reshape(X, (X.shape[0], X.shape[1], 1))
 
     # ======================================================
-    # 🔹 Modelo ARIMA
+    # Modelo ARIMA
     # ======================================================
-    print("🧩 Entrenando modelo ARIMA...")
+    print("Entrenando modelo ARIMA...")
     try:
         arima_model = ARIMA(prices, order=(5, 1, 2))
         arima_result = arima_model.fit()
@@ -70,12 +68,12 @@ for symbol in cryptos:
         plt.savefig(f"output/{symbol}_forecast_arima.png")
         plt.close()
     except Exception as e:
-        print(f"⚠️ Error en ARIMA para {symbol}: {e}")
+        print(f"Error en ARIMA para {symbol}: {e}")
 
     # ======================================================
-    # 🔹 Modelo LSTM
+    # Modelo LSTM
     # ======================================================
-    print("🧠 Entrenando modelo LSTM...")
+    print("Entrenando modelo LSTM...")
     lstm_model = Sequential([
         LSTM(50, return_sequences=False, input_shape=(time_steps, 1)),
         Dense(1)
@@ -95,9 +93,9 @@ for symbol in cryptos:
     plt.close()
 
     # ======================================================
-    # 🔹 Modelo GRU
+    # Modelo GRU
     # ======================================================
-    print("🧩 Entrenando modelo GRU...")
+    print("Entrenando modelo GRU...")
     gru_model = Sequential([
         GRU(50, return_sequences=False, input_shape=(time_steps, 1)),
         Dense(1)
@@ -116,6 +114,6 @@ for symbol in cryptos:
     plt.savefig(f"output/{symbol}_forecast_gru.png")
     plt.close()
 
-    print(f"✅ Modelos de {symbol} entrenados y gráficos guardados en /output/")
+    print(f"Modelos de {symbol} entrenados y gráficos guardados en /output/")
 
-print("\n🎯 Proceso completo para todas las monedas finalizado.")
+print("\nProceso completo para todas las monedas finalizado.")

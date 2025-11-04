@@ -163,10 +163,10 @@ print(balanced_data.head())
 
 # Ver resumen estadístico general
 stats = df.describe()
-print("📊 Estadísticas Descriptivas:")
+print("Estadísticas Descriptivas:")
 print(stats)
 
 # Mostrar valores nulos
-print("\n🔍 Valores nulos por columna:")
+print("\nValores nulos por columna:")
 print(df.isnull().sum())
 

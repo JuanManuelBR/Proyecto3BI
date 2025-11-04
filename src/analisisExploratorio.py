@@ -1,5 +1,5 @@
 # ==========================================================
-# 📊 Análisis Exploratorio - Estadísticas, Visualización y Correlación
+# Análisis Exploratorio - Estadísticas, Visualización y Correlación
 # ==========================================================
 
 import pandas as pd
@@ -11,9 +11,8 @@ from pathlib import Path
 DATA_PATH = Path("data/crypto_dataset_final.csv")
 
 # ==========================================================
-# 1️⃣ Cargar los datos
+# Cargar los datos
 # ==========================================================
-print("📥 Cargando datos...")
 df = pd.read_csv(DATA_PATH)
 
 # Asegurar que la columna 'Date' esté en formato datetime
@@ -22,9 +21,9 @@ if 'Date' in df.columns:
     df = df.sort_values('Date')
 
 # ==========================================================
-# 2️⃣ Estadísticas descriptivas
+# Estadísticas descriptivas
 # ==========================================================
-print("\n📊 Estadísticas Descriptivas:")
+print("\nEstadísticas Descriptivas:")
 
 # Guardar en CSV
 output_dir = Path("output")
@@ -39,7 +38,7 @@ symbol_map = {
 # Imprimir estadísticas descriptivas para cada moneda
 for symbol_id, symbol_name in symbol_map.items():
     print("\n" + "="*70)
-    print(f"📊 ESTADÍSTICAS DESCRIPTIVAS PARA {symbol_name}")
+    print(f"ESTADÍSTICAS DESCRIPTIVAS PARA {symbol_name}")
     print("="*70)
     
     # Filtrar los datos de la moneda
@@ -52,15 +51,15 @@ for symbol_id, symbol_name in symbol_map.items():
     print(stats)
     
     # Mostrar valores nulos por columna
-    print("\n🔍 Valores nulos por columna:")
+    print("\nValores nulos por columna:")
     print(df_symbol.isnull().sum())
 
 
 # Mostrar valores nulos
-print("\n🔍 Valores nulos por columna:")
+print("\nValores nulos por columna:")
 
 # ==========================================================
-# 3️⃣ Visualización de tendencias
+# Visualización de tendencias
 # ==========================================================
 # Graficar cada símbolo con su propia línea
 # Obtener lista de símbolos únicos
@@ -84,7 +83,7 @@ for symbol in symbols:
 
     print(f"Gráfica guardada en: {output_path}")
 # ==========================================================
-# 4️⃣ Correlaciones
+# Correlaciones
 # ==========================================================
 print("\n🔗 Matriz de Correlación:")
 corr = df.corr(numeric_only=True)
@@ -97,5 +96,5 @@ plt.tight_layout()
 plt.savefig(output_dir / "matriz_correlacion.png")
 plt.show()
 
-print("\n✅ Análisis exploratorio completado.")
-print(f"📂 Resultados guardados en: {output_dir.resolve()}")
+print("\nAnálisis exploratorio completado.")
+print(f"Resultados guardados en: {output_dir.resolve()}")

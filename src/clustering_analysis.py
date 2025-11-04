@@ -1,4 +1,4 @@
-# src/clustering_analysis.py
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -21,7 +21,7 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(df_features)
 
 # ==========================================================
-# 2️⃣ K-MEANS (Particional)
+# K-MEANS (Particional)
 # ==========================================================
 print("🔹 Aplicando K-Means...")
 kmeans = KMeans(n_clusters=3, random_state=42)
@@ -36,7 +36,7 @@ plt.savefig("output/kmeans_clusters.png")
 plt.close()
 
 # ==========================================================
-# 3️⃣ DBSCAN (Basado en densidad)
+# DBSCAN (Basado en densidad)
 # ==========================================================
 print("🔹 Aplicando DBSCAN...")
 dbscan = DBSCAN(eps=0.8, min_samples=10)
@@ -51,7 +51,7 @@ plt.savefig("output/dbscan_clusters.png")
 plt.close()
 
 # ==========================================================
-# 4️⃣ JERÁRQUICO
+# JERÁRQUICO
 # ==========================================================
 print("🔹 Aplicando clustering jerárquico...")
 linkage_matrix = linkage(X_scaled, method="ward")
@@ -65,7 +65,7 @@ plt.savefig("output/hierarchical_dendrogram.png")
 plt.close()
 
 # ==========================================================
-# 5️⃣ Guardar resultados
+# Guardar resultados
 # ==========================================================
 output_path = "output/clustering_results.csv"
 df.to_csv(output_path, index=False)
