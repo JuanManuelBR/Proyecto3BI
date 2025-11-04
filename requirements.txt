@@ -3,6 +3,9 @@ flake8
 gdown
 isort
 Jupyter
+seaborn
+tensorflow
+keras
 matplotlib
 numpy
 pandas
@@ -10,3 +13,9 @@ pytest
 scikit-learn
 seaborn
 yfinance
+statsmodels
+numpy
+Cython
+prophet
+plotly
+scipy
