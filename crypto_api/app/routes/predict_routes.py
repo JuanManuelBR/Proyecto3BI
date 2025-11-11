@@ -133,11 +133,11 @@ def recommendations():
 
             if variacion is not None:
                 if variacion > 1:
-                    recomendacion = "Comprar 📈"
+                    recomendacion = "Comprar"
                 elif variacion < -1:
-                    recomendacion = "Vender 📉"
+                    recomendacion = "Vender"
                 else:
-                    recomendacion = "Mantener ⚖️"
+                    recomendacion = "Mantener"
             else:
                 recomendacion = "Sin datos suficientes"
 
